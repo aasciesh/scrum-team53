@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ScrumMainApp.Models.Task>
+@foreach (var item in Model)
+{
+    <div class="task-portlet">
+        <div class="task-portlet-header">
+            @if (item.status == "Planned")
+            {
+                <span class="label label-info portlet-label">@Html.DisplayFor(modelitem => item.status)</span>
+            }
+            else if (item.status == "Ongoing")
+            {
+                <span class="label label-warning portlet-label">@Html.DisplayFor(modelitem => item.status)</span>
+            }
+            else if (item.status == "Done")
+            {
+                <span class="label label-success  portlet-label">@Html.DisplayFor(modelitem => item.status)</span>
+            }
+            @Html.DisplayFor(modelitem => item.User.firstName)
+                <span class="icons-set">
+            @if (Convert.ToString(Session["role"]) == "developer")
+            { 
+
+            
+            <a href="@Url.Action("edit", "task", new { id = item.backlogId })"><i class="icon-pencil icon-black"
+                title="edit"></i></a><a href="@Url.Action("Delete", "task", new { id = item.backlogId })">
+                    <i class="icon-remove icon-black" title="delete"></i></a>
+                        }<a href="@Url.Action("Details", "task", new { id = item.backlogId })" class="details">
+                        <i class="icon-search icon-black" title="view"></i></a></span>
+        </div>
+        <div class="task-portlet-content">
+        @Html.DisplayFor(modelitem => item.description)
+        </div>
+    </div>
+    
+}

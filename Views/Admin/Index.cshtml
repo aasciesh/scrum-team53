@@ -1,0 +1,13 @@
+﻿@model ScrumMainApp.Models.User
+
+@{
+    ViewBag.Title = "Admin";
+    ViewBag.header = "Admin Panel";
+}
+
+<div id="projectlistDiv">
+ @{Html.RenderAction("allProjectList", "project");}
+</div>
+<div id="userListDiv">
+@{Html.RenderAction("allUsersList", "User");}
+</div>

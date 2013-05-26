@@ -1,0 +1,15 @@
+﻿@{
+
+ViewBag.Title = "BurnDown"; ViewBag.header = Session["projectName"]; }
+<center><h4 id="burndownSprint">@ViewBag.sprintName</h4></center>
+<div class="btn-group" style="position:relative; left:25px; margin-bottom: 20px;">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Choose Sprint <span
+        class="caret"></span></a>
+    <ul class="dropdown-menu">
+        @{Html.RenderAction("SprintsListForCharts", "Sprint", new { id = Session["projectId"] });}
+    </ul>
+</div>
+<br />
+<div id="chartDiv">
+    @{Html.RenderAction("chartForSprint", "burndown", new { id = ViewBag.firstSprintid });}
+</div>

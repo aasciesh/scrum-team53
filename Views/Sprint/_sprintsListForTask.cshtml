@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ScrumMainApp.Models.Sprint>
+
+@foreach (var item in Model) 
+{
+   
+   <div class="taskHolder">
+            <div class="taskHolderHead">
+
+            </div>
+
+            <div class="taskHolderBody">
+                @{Html.RenderAction("sprinttaskItemList", "task", new { id = item.sprintId });}
+            </div>
+   </div>
+
+
+}

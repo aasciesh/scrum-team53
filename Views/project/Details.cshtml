@@ -1,0 +1,21 @@
+﻿@model ScrumMainApp.Models.Project
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.header = "Details";
+}
+
+
+<fieldset>
+    <legend>Project</legend>
+
+    <div class="display-label">projectName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.projectName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.projectId }) 
+   
+</p>
+@{Html.RenderAction("participationInProject", "Participation", new { id = @Session["projectID"] });}

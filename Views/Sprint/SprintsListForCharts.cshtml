@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ScrumMainApp.Models.Sprint>
+@foreach(var items in Model)
+{
+        <li>
+        <a class="chartsSprintDrop" data-value="@items.sprintNumber" >sprint: @items.sprintNumber
+        </a>
+    </li>
+    
+}
+

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.header = @Model.projectName;
+}
+
+@if (Convert.ToString(Session["role"]) == "product owner")
+{
+    <script type="text/javascript">
+    
+    var projectId= @Model.projectId;
+    </script>
+    <div id="backlogItemsDiv">
+        <div id="backloghead">
+            <div id="BLheading">
+                <h5>
+                    Unsprinted BacklogItems</h5>
+            </div>
+            <div id="BLbutton">
+                <a class="btn btn-mini btn-primary" href="@Url.Action("Create", "BacklogItem")"><i
+                    class="icon-plus-sign icon-white"></i>Create BacklogItem</a>
+            </div>
+        </div>
+        <div id="backlogBody">
+            <div id="backlogColumnDiv" class="column backlogColumn">
+                @{Html.RenderAction("backlogItemsList", "backlogitem", new { id = @Session["projectID"] });}
+             </div>
+        </div>
+    </div>
+    <div id="sprintBacklogDiv">
+        <div id="sprintbackloghead">
+            <div id="SBLheading">
+                <h5>
+                    Sprints</h5>
+            </div>
+            <div id="SBLbutton">
+                <a class="btn  btn-mini btn-primary" href="@Url.Action("Create", "Sprint")"><i class="icon-plus-sign icon-white">
+                </i>Create Sprint</a>
+            </div>
+        </div>
+        <div>
+            <div id="sprintbacklogBody">
+                @{Html.RenderAction("SprintsList", "sprint", new { id = @Session["projectID"] });}
+            </div>
+        </div>
+    </div>
+
+}
+@if (Convert.ToString(Session["role"] )== "developer")
+{
+ 
+    <div id="sprintBacklogDiv">
+        
+        <div>
+            <div id="sprintbacklogBody">
+                @{Html.RenderAction("SprintsList", "sprint", new { id = @Session["projectID"] });}
+            </div>
+        </div>
+    </div>
+    <div id="backlogItemsDiv">
+        <div id="backloghead">
+            <div id="BLheading">
+                <h5>
+                    Tasks</h5>
+            </div>
+            <div id="BLbutton">
+                <a class="btn btn-mini btn-primary" href="@Url.Action("Create", "Task")"><i class="icon-plus-sign icon-white">
+                </i>Create Task</a>
+            </div>
+        </div>
+        <div id="backlogBody">
+            <div id="backlogColumnDiv" class="taskColumn">
+                @{Html.RenderAction("SprintsListfortask", "Sprint", new { id = @Session["projectID"] });}
+            </div>
+        </div>
+    </div>
+    
+}
+@if (Convert.ToString(Session["role"] )== "scrum master")
+{
+
+<div id="backlogItemsDiv">
+        <div id="backloghead">
+            <div id="BLheading">
+                <center><h5>
+                    All BacklogItems</h5></center>
+            </div>
+            <div id="BLbutton">
+               
+            </div>
+        </div>
+        <div id="backlogBody">
+            <div id="backlogColumnDiv" class="column backlogColumn">
+                @{Html.RenderAction("allBacklogItemsList", "backlogitem", new { id = @Session["projectID"] });}
+             </div>
+        </div>
+    </div>
+    <div id="backlogItemsDiv">
+        <div id="backloghead">
+            <div id="BLheading">
+                <center> <h5>
+                    Tasks</h5> </center>
+            </div>
+            <div id="BLbutton">
+                
+            </div>
+        </div>
+        <div id="backlogBody">
+            <div id="backlogColumnDiv" class="taskColumn">
+                @{Html.RenderAction("SprintsListfortask", "Sprint", new { id = @Session["projectID"] });}
+            </div>
+        </div>
+    </div>
+}
+

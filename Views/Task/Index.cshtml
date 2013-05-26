@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ScrumMainApp.Models.Task>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            BacklogItem
+        </th>
+        <th>
+            User
+        </th>
+        <th>
+            description
+        </th>
+        <th>
+            timeEstimate
+        </th>
+        <th>
+            actualTimeUse
+        </th>
+        <th>
+            Status1
+        </th>
+        <th>
+            startDate
+        </th>
+        <th>
+            endDate
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BacklogItem.story)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.timeEstimate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actualTimeUse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status1.status1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.taskId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.taskId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.taskId })
+        </td>
+    </tr>
+}
+
+</table>

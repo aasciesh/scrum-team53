@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ScrumMainApp.Models.Sprint>
+            
+
+@foreach (var item in Model)
+{
+    var id = item.sprintId;
+    <div class="sprintContainer">
+        <div class="verticalTag">
+        <span class="verticle">Sprint:@Html.DisplayFor(modelitem => item.sprintNumber)</span>
+        </div>
+        <div class="columnContainerBody">
+            <div class="sprintsHeaderDiv">
+                <p style="font-size:x-smaller; font-family:segoe UI; color:White;">Start Date: @Html.DisplayFor(modelitem => item.startDate,"ShortDateTime") || End date: @Html.DisplayFor(modelitem => item.endDate, "ShortDateTime")</p>
+
+                <span class="icons-set" style="position: relative; top: -25px;">
+                @if (Convert.ToString(Session["role"]) == "product owner")
+                    {
+<a href="@Url.Action("edit", "Sprint", new { id = item.sprintId })"><i class="icon-pencil icon-white"  title="edit"></i></a>
+
+<a href="@Url.Action("Delete", "Sprint", new { id = item.sprintId })"><i class="icon-remove icon-white"  title="delete"></i></a>
+}
+<a href="@Url.Action("Details", "Sprint", new { id = item.sprintId })" class="details"><i class="icon-search icon-white"  title="view"></i></a>
+</span>
+            </div>
+            <div class="column sprintBacklogColumn" data-value="@item.sprintId">
+                @{Html.RenderAction("sprintBacklogItemsList", "backlogItem", new { id = id });}
+            </div>
+        </div>
+    </div>
+}

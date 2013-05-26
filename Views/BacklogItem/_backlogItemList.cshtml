@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ScrumMainApp.Models.BacklogItem>
+           
+           
+@foreach (var item in Model) {
+<div data-value="@item.backlogId" class="portlet">
+<div class="portlet-header">
+   ​<span class="badge badge-inverse">@Html.DisplayFor(modelitem => item.priority)</span>
+@if(item.status=="Planned")
+{
+<span class="label label-info portlet-label" >@Html.DisplayFor(modelitem => item.status)</span>
+}
+else if (item.status == "Ongoing")
+{
+<span class="label label-warning portlet-label" >@Html.DisplayFor(modelitem => item.status)</span>
+}
+else if(item.status == "Done")
+{
+<span class="label label-success  portlet-label" >@Html.DisplayFor(modelitem => item.status)</span>
+}
+
+<span class="icons-set">
+@if (Convert.ToString(Session["role"]) == "product owner")
+{
+<a href="@Url.Action("edit", "BacklogItem", new { id = item.backlogId })"><i class="icon-pencil icon-black"  title="edit"></i></a>
+
+<a href="@Url.Action("Delete", "BacklogItem", new { id = item.backlogId })"><i class="icon-remove icon-black"  title="delete"></i></a>
+}
+<a href="@Url.Action("Details", "BacklogItem", new { id = item.backlogId })" class="details"><i class="icon-search icon-black"  title="view"></i></a>
+</span>
+</div>
+<div class="portlet-content"> @Html.DisplayFor(modelItem => item.story)</div>
+</div>
+ }

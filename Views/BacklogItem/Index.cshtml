@@ -1,0 +1,78 @@
+﻿
+@model IEnumerable<ScrumMainApp.Models.BacklogItem>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.header = "Index";
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            backlogId
+        </th>
+        <th>
+            Project
+        </th>
+        <th>
+            Sprint
+        </th>
+        <th>
+            story
+        </th>
+        <th>
+            estimatedSize
+        </th>
+        <th>
+            Status1
+        </th>
+        <th>
+            priority
+        </th>
+        <th>
+            description
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.backlogId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.projectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sprint.sprintNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.story)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estimatedSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status1.status1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.priority)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+     
+}
+
+</table>

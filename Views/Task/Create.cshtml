@@ -1,0 +1,87 @@
+﻿@model ScrumMainApp.Models.Task
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Task</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.backlogId, "BacklogItem")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("backlogId", String.Empty)
+            @Html.ValidationMessageFor(model => model.backlogId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.userId, "User")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("userId", String.Empty)
+            @Html.ValidationMessageFor(model => model.userId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.timeEstimate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.timeEstimate)
+            @Html.ValidationMessageFor(model => model.timeEstimate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.actualTimeUse)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.actualTimeUse)
+            @Html.ValidationMessageFor(model => model.actualTimeUse)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.status, "Status1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("status", String.Empty)
+            @Html.ValidationMessageFor(model => model.status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.startDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.startDate)
+            @Html.ValidationMessageFor(model => model.startDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.endDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.endDate)
+            @Html.ValidationMessageFor(model => model.endDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+

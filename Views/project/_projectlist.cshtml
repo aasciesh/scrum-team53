@@ -1,0 +1,7 @@
+﻿@model IEnumerable<ScrumMainApp.Models.Project>
+           
+
+@foreach (var item in Model)
+{
+   <li> @Html.ActionLink(item.projectName, "Dashboard", "Project", new { id = item.projectId }, null)</li>
+}

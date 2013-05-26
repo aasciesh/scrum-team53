@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ScrumMainApp.Models.Sprint>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.header = "Index";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Project
+        </th>
+        <th>
+            sprintNumber
+        </th>
+        <th>
+            startDate
+        </th>
+        <th>
+            endDate
+        </th>
+        <th>
+            sprintGoal
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.projectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sprintNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sprintGoal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.sprintId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.sprintId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.sprintId })
+        </td>
+    </tr>
+    
+}
+
+</table>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/css/project14.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <!--[if IE]>
+<style type="text/css">
+  .verticle
+{
+    width:110px;
+    top:-20px;
+}
+</style>
+<![endif]-->
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="@Url.Content("~/js/appScript25.js")" type="text/javascript"></script>
+    @if (ViewBag.Title == "BurnDown")
+    { 
+        <script src="@Url.Content("~/js/flot.js")"  type="text/javascript"></script>
+    }
+</head>
+<body>
+    <div class="wrapper">
+        <div id="navbar" class="navbar navbar-inverse navbar-static">
+            <div class="navbar-inner">
+                <div class="container" style="width: 960px;">
+                    @*<div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div> *@ <a class="brand" href="@Url.Action("Index","Home")">Team 53</a>
+                    <ul class="nav">
+                        @if (Session["userId"] != null && Session["projectId"] != null && (Session["isScrumParticipant"]!=null) )
+                        {
+                            <li class="@(ViewBag.Title == "Dashboard" ? "active" : "")"><a href="@Url.Action("dashboard", "Project", new { id = Session["projectID"] })">
+                                <i class="icon-th-large icon-white"></i>Dashboard</a></li>
+                            <li class="divider-vertical"></li>
+                            <li class="@(ViewBag.Title == "BurnDown" ? "active" : "")"><a href="@Url.Action("index", "BurnDown")">
+                                <i class="icon-fire icon-white"></i>Burndown</a></li>
+                            <li class="divider-vertical"></li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Choose
+                                Project <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    @{Html.RenderAction("projectlist", "Project");}
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    @if (Session["userId"] != null)
+                    {
+                    
+                        <a class="btn btn-inverse btn-mini pull-right" href="@Url.Action("LogOut", "Session")">
+                            Log out</a>
+                        <a class="pull-right" style="position:relative; top:8px; right:12px; color:grey" href="@Url.Action("details", "user", new { id = Session["userId"] })">
+                            Hi @Session["userName"]!</a>}
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron" style="height: 50px">
+            <h3 class="shadowed">
+                @ViewBag.header</h3>
+        </div>
+        @if (@ViewBag.errorMsg != null)
+        { @RenderPage("alert.cshtml")}
+        <div class="container" style="width: 960px;">
+            <div id="overlay">
+            </div>
+            <div id="overlay-content">
+                <div style="width: 470px; height: 10px;">
+                    <img id="close-button" style="float: right; cursor: pointer" src="../../img/Button_Close.png"
+                        title="close" /></div>
+                <div style="width: 470px; min-height: 85px;">
+                </div>
+            </div>
+            <div id="overlay-loading">
+                <center>
+                    <img src="../../img/329.gif" />
+                    <br />
+                    <span class="ajaxStatus" style="font-weight: bold; color: rgb(19, 115, 204);"></span>
+                </center>
+            </div>
+            @RenderBody()
+        </div>
+        <div class="push">
+        </div>
+    </div>
+    <div class="footer">
+        <center>
+            <p style="font-family: myFirstFont; font-size: larger; margin-top: 10px;">
+                Team53 © 2012</p>
+        </center>
+    </div>
+    <script src="@Url.Content("~/js/bootstrapButton.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/js/bootstrap.js")" type="text/javascript"></script>
+        <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+</body>
+</html>

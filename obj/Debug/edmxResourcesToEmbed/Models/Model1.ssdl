@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScrumDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ScrumDBModelStoreContainer">
+    <EntitySet Name="BacklogItem" EntityType="ScrumDBModel.Store.BacklogItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompanyRole" EntityType="ScrumDBModel.Store.CompanyRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Participation" EntityType="ScrumDBModel.Store.Participation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Project" EntityType="ScrumDBModel.Store.Project" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="ScrumDBModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sprint" EntityType="ScrumDBModel.Store.Sprint" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Status" EntityType="ScrumDBModel.Store.Status" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="ScrumDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Task" EntityType="ScrumDBModel.Store.Task" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="ScrumDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_BacklogItem_projectId" Association="ScrumDBModel.Store.FK_BacklogItem_projectId">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="BacklogItem" EntitySet="BacklogItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BacklogItem_sprintId" Association="ScrumDBModel.Store.FK_BacklogItem_sprintId">
+      <End Role="Sprint" EntitySet="Sprint" />
+      <End Role="BacklogItem" EntitySet="BacklogItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BacklogItem_status" Association="ScrumDBModel.Store.FK_BacklogItem_status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="BacklogItem" EntitySet="BacklogItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Participation_Project" Association="ScrumDBModel.Store.FK_Participation_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Participation" EntitySet="Participation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Participation_Role" Association="ScrumDBModel.Store.FK_Participation_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Participation" EntitySet="Participation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Participation_Users" Association="ScrumDBModel.Store.FK_Participation_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Participation" EntitySet="Participation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sprint_projectId" Association="ScrumDBModel.Store.FK_Sprint_projectId">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Sprint" EntitySet="Sprint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_backlogId" Association="ScrumDBModel.Store.FK_Task_backlogId">
+      <End Role="BacklogItem" EntitySet="BacklogItem" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_status" Association="ScrumDBModel.Store.FK_Task_status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_userId" Association="ScrumDBModel.Store.FK_Task_userId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_CompanyRole" Association="ScrumDBModel.Store.FK_Users_CompanyRole">
+      <End Role="CompanyRole" EntitySet="CompanyRole" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BacklogItem">
+    <Key>
+      <PropertyRef Name="backlogId" />
+    </Key>
+    <Property Name="backlogId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="projectId" Type="int" Nullable="false" />
+    <Property Name="sprintId" Type="int" />
+    <Property Name="story" Type="text" Nullable="false" />
+    <Property Name="estimatedSize" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="priority" Type="int" Nullable="false" />
+    <Property Name="description" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyRole">
+    <Key>
+      <PropertyRef Name="companyRoleId" />
+    </Key>
+    <Property Name="companyRoleId" Type="int" Nullable="false" />
+    <Property Name="companyRole" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Participation">
+    <Key>
+      <PropertyRef Name="projectId" />
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="role" />
+    </Key>
+    <Property Name="projectId" Type="int" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="role" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="projectId" />
+    </Key>
+    <Property Name="projectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="projectName" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="role" />
+    </Key>
+    <Property Name="role" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Sprint">
+    <Key>
+      <PropertyRef Name="sprintId" />
+    </Key>
+    <Property Name="sprintId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="projectId" Type="int" Nullable="false" />
+    <Property Name="sprintNumber" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="startDate" Type="datetime" Nullable="false" />
+    <Property Name="endDate" Type="datetime" />
+    <Property Name="sprintGoal" Type="varchar" Nullable="false" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="status" />
+    </Key>
+    <Property Name="status" Type="varchar" Nullable="false" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="taskId" />
+    </Key>
+    <Property Name="taskId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="backlogId" Type="int" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="description" Type="text" Nullable="false" />
+    <Property Name="timeEstimate" Type="int" />
+    <Property Name="actualTimeUse" Type="int" />
+    <Property Name="status" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="startDate" Type="datetime" Nullable="false" />
+    <Property Name="endDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="firstName" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="lastName" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="userName" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="companyRoleId" Type="int" />
+  </EntityType>
+  <Association Name="FK_BacklogItem_projectId">
+    <End Role="Project" Type="ScrumDBModel.Store.Project" Multiplicity="1" />
+    <End Role="BacklogItem" Type="ScrumDBModel.Store.BacklogItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="projectId" />
+      </Principal>
+      <Dependent Role="BacklogItem">
+        <PropertyRef Name="projectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BacklogItem_sprintId">
+    <End Role="Sprint" Type="ScrumDBModel.Store.Sprint" Multiplicity="0..1" />
+    <End Role="BacklogItem" Type="ScrumDBModel.Store.BacklogItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sprint">
+        <PropertyRef Name="sprintId" />
+      </Principal>
+      <Dependent Role="BacklogItem">
+        <PropertyRef Name="sprintId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BacklogItem_status">
+    <End Role="Status" Type="ScrumDBModel.Store.Status" Multiplicity="1" />
+    <End Role="BacklogItem" Type="ScrumDBModel.Store.BacklogItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="status" />
+      </Principal>
+      <Dependent Role="BacklogItem">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Participation_Project">
+    <End Role="Project" Type="ScrumDBModel.Store.Project" Multiplicity="1" />
+    <End Role="Participation" Type="ScrumDBModel.Store.Participation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="projectId" />
+      </Principal>
+      <Dependent Role="Participation">
+        <PropertyRef Name="projectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Participation_Role">
+    <End Role="Role" Type="ScrumDBModel.Store.Role" Multiplicity="1" />
+    <End Role="Participation" Type="ScrumDBModel.Store.Participation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="role" />
+      </Principal>
+      <Dependent Role="Participation">
+        <PropertyRef Name="role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Participation_Users">
+    <End Role="Users" Type="ScrumDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Participation" Type="ScrumDBModel.Store.Participation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Participation">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sprint_projectId">
+    <End Role="Project" Type="ScrumDBModel.Store.Project" Multiplicity="1" />
+    <End Role="Sprint" Type="ScrumDBModel.Store.Sprint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="projectId" />
+      </Principal>
+      <Dependent Role="Sprint">
+        <PropertyRef Name="projectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_backlogId">
+    <End Role="BacklogItem" Type="ScrumDBModel.Store.BacklogItem" Multiplicity="1" />
+    <End Role="Task" Type="ScrumDBModel.Store.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BacklogItem">
+        <PropertyRef Name="backlogId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="backlogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_status">
+    <End Role="Status" Type="ScrumDBModel.Store.Status" Multiplicity="1" />
+    <End Role="Task" Type="ScrumDBModel.Store.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="status" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_userId">
+    <End Role="Users" Type="ScrumDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Task" Type="ScrumDBModel.Store.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_CompanyRole">
+    <End Role="CompanyRole" Type="ScrumDBModel.Store.CompanyRole" Multiplicity="0..1" />
+    <End Role="Users" Type="ScrumDBModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyRole">
+        <PropertyRef Name="companyRoleId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="companyRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,22 @@
+﻿@model ScrumMainApp.Models.Project
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.header = "Delete";
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Project</legend>
+
+    <div class="display-label">projectName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.projectName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> 
+        
+    </p>
+}

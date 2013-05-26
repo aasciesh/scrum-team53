@@ -1,0 +1,35 @@
+﻿
+
+@using System.Web.Script.Serialization
+
+<script type="text/javascript">
+ var startdate= @ViewBag.startDate;
+ var enddate= @ViewBag.endDate;
+ var totalEffort= @ViewBag.totalEffort;
+
+  $(function () {
+      var d1 = [[startdate, totalEffort], [enddate, 0]];
+      var d2raw = @Html.Raw(new JavaScriptSerializer().Serialize(ViewBag.dataList1));
+
+      var d2 = d2raw.map(function(item) {
+   return [item.Timestamp, item.TaskEffortLeft];
+});
+
+
+          
+      $.plot($("#placeholder"),
+       [{ label: "ideal burndown", data: d1, lines: { show: true },points: { show: true }}, { label: "remaining effort", data: d2, lines: { show: true },points: { show: true }}],
+        { crosshair: { mode: "x" },
+                            grid: { hoverable: true, autoHighlight: false },xaxis: { mode: "time", timeformat: "%y/%m/%d"} }
+        
+        );
+
+        placeholder.resize();
+   
+
+
+  });
+</script>
+<div id="verticalChart" style="width: 20px; height:480px; float:left;">Task_Effort_Left</div>
+<div id="placeholder" style="width: 940px; height: 480px;  float:left;"></div>
+<div style="width:960px; height:20px; font-size: large; font-weight: bold;"><center>Day</center> </div>

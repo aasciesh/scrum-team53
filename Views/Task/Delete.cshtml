@@ -1,0 +1,53 @@
+﻿@model ScrumMainApp.Models.Task
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Task</legend>
+
+    <div class="display-label">BacklogItem</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BacklogItem.story)
+    </div>
+
+    <div class="display-label">User</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.firstName)
+    </div>
+
+    <div class="display-label">description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">timeEstimate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.timeEstimate)
+    </div>
+
+    <div class="display-label">actualTimeUse</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.actualTimeUse)
+    </div>
+
+    <div class="display-label">Status1</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status1.status1)
+    </div>
+
+    <div class="display-label">startDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.startDate)
+    </div>
+
+    <div class="display-label">endDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.endDate)
+    </div>
+</fieldset>
+

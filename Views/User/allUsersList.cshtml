@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ScrumMainApp.Models.User>
+
+<div style="width:475px; ">
+
+<a class="btn btn-primary btn-mini" href="@Url.Action("Create", "User")"><i class="icon-plus-sign icon-white"></i> Create User</a>
+<table  class="table table-striped table-bordered table-hover" style="margin-top:10px;">
+    <tr>
+        <th>
+            Users
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.firstName+ " " + item.lastName, "details","user",new { id=item.userId }, null) 
+            
+        </td>
+        <td>
+        <a href="@Url.Action("Edit","User", new { id = item.userId }, null)" > <i class="icon-pencil icon-black" title="edit"></i></a> |
+            <a href="@Url.Action("Delete","User", new { id=item.userId }, null)"> <i class="icon-remove icon-black" title="delete"></i></a> 
+        </td>
+    </tr>
+}
+
+</table>
+</div>
